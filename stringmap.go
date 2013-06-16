@@ -1,3 +1,4 @@
+//stringmap includes utility structs and methods for handling maps of strings to pairs of strings
 package stringmap
 
 import (
@@ -5,19 +6,15 @@ import (
 	"strings"
 )
 
-//StringPair is a struct holding two strings, Key and Val.
 type StringPair struct {
 	Key string
 	Val string
 }
 
-//StringPairs is a slice of *StringPair.
 type StringPairs []*StringPair
 
-//Len returns the lenght of a StringPairs slice.
 func (s StringPairs) Len() int { return len(s) }
 
-//Swap exchanges to items in a StringPairs slice.
 func (s StringPairs) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 //Keys returns a slice of strings containing the Key of each StringPair
@@ -53,10 +50,12 @@ func (m StringMap) String() string {
 	return strings.Join(vals, " ")
 }
 
+//ByKey provides an interface to sort StringPairs by Key
 type ByKey struct{ StringPairs }
 
 func (s ByKey) Less(i, j int) bool { return s.StringPairs[i].Key < s.StringPairs[j].Key }
 
+//ByVal provides an interface to sort StringPairs by Val
 type ByVal struct{ StringPairs }
 
 func (s ByVal) Less(i, j int) bool { return s.StringPairs[i].Val < s.StringPairs[j].Val }
